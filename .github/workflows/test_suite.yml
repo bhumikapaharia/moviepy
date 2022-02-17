@@ -98,6 +98,6 @@ jobs:
               python -m pip install python-dotenv && \
               python -m pip install ".[test, optional, doc]" && \
               pip install -e . && \
-              cat /etc/ImageMagick-6/policy.xml | sed 's/none/read,write/g' | tee /etc/ImageMagick-6/policy.xml && \
+              apt install imagemagick -y && \
               python -m pytest --doctest-glob "moviepy/**/**.py" --cov moviepy --cov-report term-missing && \
               deactivate'
