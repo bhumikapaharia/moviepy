@@ -97,13 +97,12 @@ jobs:
               python3.8 -m pip install python-dotenv && \
               python3.8 -m pip install -e .[test] && \
               python3.8 -m pip install ".[test, optional, doc]" && \
-              wget http://mirror.archlinuxarm.org/aarch64/extra/imagemagick-7.1.0.25-1-aarch64.pkg.tar.xz && \
-              tar -xvf imagemagick-7.1.0.25-1-aarch64.pkg.tar.xz && \
-              cd imagemagick-7.1.0.25-1-aarch64 && \
-              python3 setup.pu install && \
+              git clone https://github.com/ImageMagick/ImageMagick.git ImageMagick-7.1.0 && \
+              cd ImageMagick-7.1.0 && \
+              ./configure && \
+              make && \
               cd .. && \
               apt install ffmpeg -y && \
-              apt install imagemagick -y && \
               python3.8 -m pytest --doctest-glob "moviepy/**/**.py" --cov moviepy --cov-report term-missing && \
               python3.8 -m pip install pytest && \
               deactivate'
