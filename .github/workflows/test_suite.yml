@@ -93,11 +93,13 @@ jobs:
               ls && \
               python -m site --user-site && \
               python -m pip install --upgrade wheel setuptools && \
-              python3 -m pip install --upgrade pip && \
-              python -m pip install ".[test, doc]"
-              python -m pip install python-dotenv && \
-              python -m pip install ".[test, optional, doc]" && \
-              pip install -e . && \
+              python3 -m pip install --upgrade pip && \              
+              python3.8 setup.py install && \
+              python3.8 -m pip install python-dotenv && \
+              python3.8 -m pip install -e .[test] && \
+              python3.8 -m pip install ".[test, optional, doc]" && \
+              apt install ffmpeg -y && \
               apt install imagemagick -y && \
-              python -m pytest --doctest-glob "moviepy/**/**.py" --cov moviepy --cov-report term-missing && \
+              python3.8 -m pytest --doctest-glob "moviepy/**/**.py" --cov moviepy --cov-report term-missing && \
+              python3.8 -m pip install pytest && \
               deactivate'
